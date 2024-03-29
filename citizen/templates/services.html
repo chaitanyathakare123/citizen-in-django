@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{%block title%}
+services
+ {%endblock title%}
+{%block body%} 
+<div class="container">
+<h2>Submit a Complaint</h2>
+<div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address">
+  </div>
+  <div class="form-group">
+    <label for="category">Complaint Category:</label>
+    <select type="text" class="form-control" id="category" name="category" required>
+        <option value="">Select Category</option>
+        <option value="Infrastructure">Infrastructure</option>
+        <option value="Public Safety">Public Safety</option>
+        <option value="Environment">Environment</option>
+        <option value="Community Services">Community Services</option>
+    </select>
+</div>
+
+<div>
+    <label for="subject">Subject:</label>
+    <input type="text" class="form-control" id="subject" name="subject" required>
+</div>
+<div>
+    <label for="description">Description:</label>
+    <textarea id="description"class="form-control" name="description" required></textarea>
+</div>
+<div>
+    <label for="urgency">Urgency Level:</label>
+    <select id="urgency"class="form-control" name="urgency" required>
+        <option value="">Select Urgency</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Emergency">Emergency</option>
+    </select>
+</div>
+
+<div>
+    <label for="attachments">Attachments:</label>
+    <input type="file" id="attachments" name="attachments" accept="image/*, .pdf">
+</div>
+    <input type="submit" value="Submit">
+</form>
+</div>
+
+
+ {%endblock body%}

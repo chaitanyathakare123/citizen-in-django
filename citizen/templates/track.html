@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{%block title%}about{%endblock title%}
+
+{%block body%}
+
+<div class="container ">
+    <h2>Tracking and Status Update</h2>
+    <form action="#" method="post">
+        <div class="form-group">
+        <label for="tracking-number">Tracking Number:</label>
+        <input type="text" class="form-control" id="tracking-number" name="tracking-number" required>
+        </div>
+    <div>
+        <label for="status-update">Status Update:</label>
+        <textarea class="form-control" id="status-update" name="status-update" required></textarea>
+    </div>
+        <input type="submit" value="Update Status">
+    </form>
+</div>{%endblock body%}
