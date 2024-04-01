@@ -45,5 +45,11 @@ def register(request):
 
 def logout(request):
     return render(request,'logout.html')
+<<<<<<< HEAD
 def live(request):
     return render(request,'live.html')    
+=======
+
+def flags(request):
+    return render(request,'flags.html')
+>>>>>>> 4ac008e64a23991f4185eb76288da702797bb5e2
