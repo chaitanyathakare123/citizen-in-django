@@ -63,10 +63,14 @@
                       </li>
                     
                     </ul>
-                    
+                   
                     <form class="d-flex">
-                      <a class="btn btn-outline-success" href=/login>login</a>
-                      <a class="btn btn-outline-success" href=/login>Registration</a>
+                      {%  if user.is_authenticated %}
+                      <a href=" {% url "logout" %} "class="btn btn-warning ms-2 rounded">Logout</a>
+                      {% else%}
+                      <a class="btn btn-outline-success" href=" {% url "login" %} ">login</a>
+                      <a class="btn btn-outline-success" href=" {% url "register" %} ">Registration</a>
+                      {% endif%}
                     </form>
                   </div>
                 </div>

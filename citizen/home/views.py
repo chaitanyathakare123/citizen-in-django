@@ -4,7 +4,9 @@ from home.models import Contact
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LoginView
-from .forms import register
+from django.contrib.auth import authenticate, login
+
+from .forms import SignUpForm
 
 # Create your views here.
 def index(request):
@@ -37,14 +39,42 @@ def contact(request):
     return render(request,'contact.html')
     #return HttpResponse("this is contact page")
 
-def login(request):
-  return render(request,'login.html')
+def login_user(request):
+   if request.method=="POST":
+         username=request.POST['username']
+         password=request.POST['password']
+         user=authenticate(request,username=username,password=password)
+         if user is not None:
+             login(request,user)
+             messages.success(request,'You are now logged in!')
+             return redirect('index')
+         else:
+             messages.success(request, 'Username or Password is incorrect')
+             return redirect('login')
+   else:
+        return render(request, 'login.html')
 
-def register(request):
-  return render(request,'register.html')
 
-def logout(request):
-    return render(request,'logout.html')
+def register_user(request):
+    form = SignUpForm()
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request)
+            messages.success(request, "You Have Register successfully")
+            return redirect('index')
+        else:
+            messages.error(request, 'Whoops! There was a problem try again!!')
+    return render(request, "register.html", {'form': form})
+
+def logout_user(request):
+     logout(request)
+     messages.success(request,('Logged Out Successfully!'))
+     return redirect('index')
 
 def flags(request):
     return render(request,'flags.html')
