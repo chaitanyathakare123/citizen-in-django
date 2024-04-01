@@ -11,8 +11,8 @@ services
   </div>
 
   <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address">
+    <label for="email">Title:</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter the title of Complaint">
   </div>
   <div class="form-group">
     <label for="category">Complaint Category:</label>
@@ -25,10 +25,6 @@ services
     </select>
 </div>
 
-<div>
-    <label for="subject">Subject:</label>
-    <input type="text" class="form-control" id="subject" name="subject" required>
-</div>
 <div>
     <label for="description">Description:</label>
     <textarea id="description"class="form-control" name="description" required></textarea>
@@ -48,7 +44,9 @@ services
     <label for="attachments">Attachments:</label>
     <input type="file" id="attachments" name="attachments" accept="image/*, .pdf">
 </div>
-    <input type="submit" value="Submit">
+<form class="d-flex">
+<a class="btn btn-outline-success" href=/live>Get Live Location </a>
+    <a type="submit" value="Submit" >
 </form>
 </div>
 
