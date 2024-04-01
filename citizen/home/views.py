@@ -44,5 +44,6 @@ def register(request):
   return render(request,'register.html')
 
 def logout(request):
-
     return render(request,'logout.html')
+def live(request):
+    return render(request,'live.html')    
