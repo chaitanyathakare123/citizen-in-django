@@ -1,5 +1,5 @@
 from django.db import models
-from geoposition.fields import GeopositionField
+
 
 # Create your models here.
 class Contact(models.Model):
