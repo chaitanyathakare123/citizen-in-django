@@ -6,6 +6,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LoginView
 from .forms import register
 
+
+
 # Create your views here.
 def index(request):
     context={
@@ -52,4 +54,3 @@ def live(request):
 
 def flags(request):
     return render(request,'flags.html')
-
