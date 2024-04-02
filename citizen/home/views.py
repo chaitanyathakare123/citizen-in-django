@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LoginView
 from .forms import register
+from geo.models import Zone
+from django.shortcuts import render_to_response, get_object_or_404, redirect
+
 
 # Create your views here.
 def index(request):
@@ -52,4 +55,3 @@ def live(request):
 
 def flags(request):
     return render(request,'flags.html')
-
