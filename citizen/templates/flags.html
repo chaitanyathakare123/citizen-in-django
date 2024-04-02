@@ -7,7 +7,7 @@
 <html>
   <head>
     <title>Complex Marker Icons</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+   
     <style>
       /**
        * @license
@@ -30,29 +30,14 @@
     </style>
   </head>
   <body>
+    
+    
     <gmp-map center="19.0760,72.8777" zoom="10" map-id="DEMO_MAP_ID">
       {% for complaint in complaints  %}
-      <gmp-advanced-marker position="{{complaint.latitude}}, {{complaint.longitude}}" title="Bondi Beach">
+         <gmp-advanced-marker position="{{complaint.latitude}}, {{complaint.longitude}}" title="{{complaint.title}}">
         <img class="flag-icon"
              src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
       </gmp-advanced-marker>{% endfor %}
-      
-      {% comment %} <gmp-advanced-marker position="18.9894, 73.1175" title="Coogee Beach">
-        <img class="flag-icon"
-             src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
-      </gmp-advanced-marker>
-      <gmp-advanced-marker position="18.7501, 73.0421" title="Cronulla Beach">
-        <img class="flag-icon"
-             src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
-      </gmp-advanced-marker>
-      <gmp-advanced-marker position="-33.800101, 151.287478" title="Manly Beach">
-        <img class="flag-icon"
-             src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
-      </gmp-advanced-marker>
-      <gmp-advanced-marker position="-33.950198, 151.259302" title="Maroubra Beach">
-        <img class="flag-icon"
-             src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
-      </gmp-advanced-marker> {% endcomment %}
     </gmp-map>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm_0R1qBwKzvNvuM8nUII2s-oH3Zf5lfU&loading=async&libraries=marker&v=beta&solution_channel=GMP_CCS_complexmarkers_v2"

@@ -1,32 +1,25 @@
+
 from django.shortcuts import render,HttpResponse,redirect
 from datetime import datetime
+from home.models import Contact
 from home.models import Contact,Complaint
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
-
 from .forms import SignUpForm
 
-# Create your views here.
 def index(request):
-    context={
-        
-    }
-    return render(request,'index.html',context)
-    #return HttpResponse("this is homepage")
-
-def about(request):
-    return render(request,'about.html')
+      return render(request,'index.html')
     #return HttpResponse("this is about page")
+
 @login_required
 def services(request):
     user = request.user
     if request.method == 'POST':
         name = request.POST.get('name')
-        email = request.POST.get('email')
+        title = request.POST.get('title')
         category = request.POST.get('category')
         description = request.POST.get('description')
         urgency = request.POST.get('urgency')
@@ -34,31 +27,29 @@ def services(request):
         latitude=request.POST.get('latitude')
         longitude=request.POST.get('longitude')
 
-        complaint = Complaint.objects.create(name=name, email=email, category=category, description=description, urgency=urgency, attachments=attachments,latitude=latitude,longitude=longitude,user=user)
+        complaint = Complaint.objects.create(name=name, title=title, category=category, description=description, urgency=urgency, attachments=attachments,latitude=latitude,longitude=longitude,user=user)
         complaint.user=user
         complaint.save()
 
         messages.success(request, 'Complaint submitted successfully!')
-        return redirect('flag')
+        return redirect('flags')
 
     return render(request, 'services.html')
     #return HttpResponse("this is services page")
 
 def track(request):
     return render(request,'track.html')
-
 def contact(request):
     if request.method=="POST":
         name=request.POST.get('name')
-        email=request.POST.get('email')
+        title=request.POST.get('title')
         phone=request.POST.get('phone')
         desc=request.POST.get('desc')
-        contact=Contact(name=name,email=email,phone=phone,desc=desc,date=datetime.today())
+        contact=Contact(name=name,title=title,phone=phone,desc=desc,date=datetime.today())
         contact.save()
         messages.success(request,'your message as been send!')
     return render(request,'contact.html')
     #return HttpResponse("this is contact page")
-
 def login_user(request):
    if request.method=="POST":
          username=request.POST['username']
@@ -73,8 +64,7 @@ def login_user(request):
              return redirect('login')
    else:
         return render(request, 'login.html')
-
-
+   
 def register_user(request):
     form = SignUpForm()
     if request.method == "POST":
@@ -84,19 +74,24 @@ def register_user(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
+            
             login(request,user)
             messages.success(request, "You Have Register successfully")
             return redirect('index')
         else:
-            messages.error(request, 'Whoops! There was a problem try again!!')
+              messages.error(request, 'Whoops! There was a problem try again!!')
     return render(request, "register.html", {'form': form})
 
 def logout_user(request):
-     logout(request)
-     messages.success(request,('Logged Out Successfully!'))
-     return redirect('index')
+    logout(request)
+    messages.success(request,('Logged Out Successfully!'))
+    return redirect('index')
 
 @login_required
 def flags(request):
+   
     complaints=Complaint.objects.filter(user=request.user)
     return render(request,'flags.html',{'complaints':complaints})
+
+def live(request):
+    return render(request,'live.html')    

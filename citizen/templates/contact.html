@@ -3,6 +3,52 @@
 contact
  {%endblock title%}
 {%block body%}
+<style>
+  .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+  }
+  
+  .form-group {
+      margin-bottom: 20px;
+  }
+  
+  label {
+      font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  
+  button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  
+  button:hover {
+      background-color: #0056b3;
+  }
+  
+  .text-center {
+      text-align: center;
+  }
+  
+  </style>
 <div class="container mb-5 py-5">
 <h1 class ="text-center">Contact Us</h1>
 <form method ="post" action="/contact">

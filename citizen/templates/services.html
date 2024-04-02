@@ -2,22 +2,130 @@
 {%block title%}
 services
  {%endblock title%}
+
 {%block body%} <form method="POST"  action={% url 'services'%}>
     {% csrf_token %}
-
+    <style>
+        /* Add custom font */
+        @import url('https://fonts.googleapis.com/css2?family=Bookman:ital@0;1&display=swap');
+      
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        label,
+        input,
+        textarea,
+        select,
+        button {
+          font-family: 'Bookman', serif;
+        }
+      
+        .container {
+          background-color: #f5f5f5;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          background-image: url('https://images.unsplash.com/photo-1604856420566-576ba98b53cd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          position: relative;
+          overflow: hidden;
+        }
+      
+        .container:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+          z-index: -1;
+        }
+      
+        .container:hover {
+          box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.2);
+        }
+      
+        .form-group {
+          margin-bottom: 20px;
+        }
+      
+        h2 {
+          margin-top: 0;
+          color: #28a745;
+          font-size: 20px;
+          font-weight: bold;
+        }
+      
+        .form-control {
+          border-color: #ccc;
+          transition: all 0.3s ease;
+          font-size: 20px;
+          font-weight: bold;
+          color: #333;
+        }
+      
+        .form-control:focus {
+          border-color: #28a745;
+          box-shadow: 0px 0px 5px 1px rgba(40, 167, 69, 0.5);
+        }
+      
+        .btn-outline-success {
+          border-color: #28a745;
+          color: #28a745;
+          transition: all 0.3s ease;
+          font-size: 20px;
+          font-weight: bold;
+          padding: 10px 20px;
+        }
+        .label{
+            color: #28a745;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .btn-outline-success:hover {
+          background-color: #28a745;
+          color: #fff;
+        }
+      
+        .btn-outline-success:focus {
+          box-shadow: 0px 0px 5px 1px rgba(40, 167, 69, 0.5);
+        }
+        input[type="submit"] {
+            padding: 15px 30px; /* Increase padding for a larger button */
+            background-color: #007bff; /* Button color */
+            color: #fff; /* Text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px; /* Increase font size for better visibility */
+            transition: background-color 0.3s; /* Add a smooth transition effect */
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Change color on hover for interactivity */
+        }
+      </style>
 <div class="container">
 <h2>Submit a Complaint</h2>
 <div class="form-group">
-    <label for="name">Name</label>
+    <label style="font-size:20px" for="name">Name</label>
     <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name">
   </div>
-
   <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address">
+    <label style="font-size:20px"  for="title">Title:</label>
+    <input type="title" class="form-control" id="title" name="title" placeholder="Enter Your Title">
   </div>
   <div class="form-group">
-    <label for="category">Complaint Category:</label>
+    <labelstyle="font-size:20px"   for="category">Complaint Category:</label>
     <select type="text" class="form-control" id="category" name="category" required>
         <option value="">Select Category</option>
         <option value="Infrastructure">Infrastructure</option>
@@ -28,17 +136,18 @@ services
 </div>
 
 <div>
-    <label for="subject">latitude</label>
+  
+    <label style="font-size:20px"  for="subject">Latitude</label>
     <input type="number" class="form-control" id="subject" name="latitude" step="any" required>
-    <label for="subject">longitude</label>
+    <label style="font-size:20px"  for="subject">Longitude</label>
     <input type="number" class="form-control" id="subject" name="longitude" step="any" required>
 </div>
 <div>
-    <label for="description">Description:</label>
+    <label style="font-size:20px"  for="description">Description:</label>
     <textarea id="description"class="form-control" name="description" required></textarea>
 </div>
 <div>
-    <label for="urgency">Urgency Level:</label>
+    <label style="font-size:20px"  for="urgency">Urgency Level:</label>
     <select id="urgency"class="form-control" name="urgency" required>
         <option value="">Select Urgency</option>
         <option value="Low">Low</option>
@@ -47,14 +156,16 @@ services
         <option value="Emergency">Emergency</option>
     </select>
 </div>
-
 <div>
-    <label for="attachments">Attachments:</label>
+    <label style="font-size:20px" for="attachments">Attachments:</label>
     <input type="file" id="attachments" name="attachments" accept="image/*, .pdf">
 </div>
+<form class="d-flex">
+    <a class="btn btn-outline-success" href=/live>Get Live Location </a><br></form> 
     <input type="submit" value="Submit">
 </form>
 </div>
+
 </form>
 
  {%endblock body%}
