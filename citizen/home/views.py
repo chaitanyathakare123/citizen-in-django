@@ -1,10 +1,12 @@
 from django.shortcuts import render,HttpResponse,redirect
 from datetime import datetime
-from home.models import Contact
+from home.models import Contact,Complaint
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+
 
 from .forms import SignUpForm
 
@@ -19,9 +21,27 @@ def index(request):
 def about(request):
     return render(request,'about.html')
     #return HttpResponse("this is about page")
-
+@login_required
 def services(request):
-    return render(request,'services.html')
+    user = request.user
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        category = request.POST.get('category')
+        description = request.POST.get('description')
+        urgency = request.POST.get('urgency')
+        attachments = request.FILES.get('attachments')
+        latitude=request.POST.get('latitude')
+        longitude=request.POST.get('longitude')
+
+        complaint = Complaint.objects.create(name=name, email=email, category=category, description=description, urgency=urgency, attachments=attachments,latitude=latitude,longitude=longitude,user=user)
+        complaint.user=user
+        complaint.save()
+
+        messages.success(request, 'Complaint submitted successfully!')
+        return redirect('flag')
+
+    return render(request, 'services.html')
     #return HttpResponse("this is services page")
 
 def track(request):
@@ -64,7 +84,7 @@ def register_user(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
-            login(request)
+            login(request,user)
             messages.success(request, "You Have Register successfully")
             return redirect('index')
         else:
@@ -76,5 +96,7 @@ def logout_user(request):
      messages.success(request,('Logged Out Successfully!'))
      return redirect('index')
 
+@login_required
 def flags(request):
-    return render(request,'flags.html')
+    complaints=Complaint.objects.filter(user=request.user)
+    return render(request,'flags.html',{'complaints':complaints})

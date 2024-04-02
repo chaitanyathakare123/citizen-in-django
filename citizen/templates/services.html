@@ -2,7 +2,9 @@
 {%block title%}
 services
  {%endblock title%}
-{%block body%} 
+{%block body%} <form method="POST"  action={% url 'services'%}>
+    {% csrf_token %}
+
 <div class="container">
 <h2>Submit a Complaint</h2>
 <div class="form-group">
@@ -26,8 +28,10 @@ services
 </div>
 
 <div>
-    <label for="subject">Subject:</label>
-    <input type="text" class="form-control" id="subject" name="subject" required>
+    <label for="subject">latitude</label>
+    <input type="number" class="form-control" id="subject" name="latitude" step="any" required>
+    <label for="subject">longitude</label>
+    <input type="number" class="form-control" id="subject" name="longitude" step="any" required>
 </div>
 <div>
     <label for="description">Description:</label>
@@ -51,6 +55,6 @@ services
     <input type="submit" value="Submit">
 </form>
 </div>
-
+</form>
 
  {%endblock body%}
