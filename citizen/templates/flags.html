@@ -7,7 +7,16 @@
 <html>
   <head>
     <title>Complex Marker Icons</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default">
+      window.addEventListener("message", (event) => {
+      if (event.data && event.data.lat && event.data.lng) {
+        const latitude = event.data.lat;
+        const longitude = event.data.lng;
+        console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+        // Use the lat and lng values as needed
+      }
+    });
+    </script>
     <style>
       /**
        * @license
@@ -30,8 +39,12 @@
     </style>
   </head>
   <body>
+    <input type="text" id="lat">
+    <input type="text" id="lng">
+    document.getElementById("lat").value = latitude;
+    document.getElementById("lng").value = longitude;
     <gmp-map center="19.0760,72.8777" zoom="10" map-id="DEMO_MAP_ID">
-      <gmp-advanced-marker position="18.9431, 73.1175" title="Bondi Beach">
+      <gmp-advanced-marker position="lat, lng" title="Bondi Beach">
         <img class="flag-icon"
              src="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"/>
       </gmp-advanced-marker>    
